@@ -1,19 +1,28 @@
+import { createElement } from "react";
+import { createRoot } from "react-dom/client";
 import "./style.css";
 
-const app = document.querySelector<HTMLDivElement>("#app");
+const app =
+  document.querySelector<HTMLDivElement>("#app") ??
+  document.body.appendChild(document.createElement("div"));
 
-if (!app) {
-  throw new Error('Elemento "#app" não encontrado.');
-}
+app.id = "app";
 
-app.innerHTML = `
-  <main>
-    <span class="eyebrow">Projeto inicial</span>
-    <h1>Low Ticket Sales Pages</h1>
-    <p>
-      Ambiente preparado para criar, personalizar e testar páginas de vendas
-      de produtos digitais.
-    </p>
-    <span class="status">Estrutura Vite + TypeScript pronta</span>
-  </main>
-`;
+createRoot(app).render(
+  createElement(
+    "main",
+    null,
+    createElement("span", { className: "eyebrow" }, "Projeto inicial"),
+    createElement("h1", null, "Low Ticket Sales Pages"),
+    createElement(
+      "p",
+      null,
+      "Ambiente preparado para criar, personalizar e testar páginas de vendas de produtos digitais."
+    ),
+    createElement(
+      "span",
+      { className: "status" },
+      "React + Vite + TypeScript prontos"
+    )
+  )
+);
